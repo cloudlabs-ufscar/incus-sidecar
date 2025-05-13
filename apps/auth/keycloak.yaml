@@ -30,12 +30,20 @@ spec:
         kubernetes.io/ingress.class: traefik
         cert-manager.io/cluster-issuer: letsencrypt
       tls: true
+    extraEnvVars:
+      - name: KC_SPI_EVENTS_LISTENER_OPENFGA_EVENTS_PUBLISHER_OPENFGA_API_URL
+        value: http://openfga.auth:8080
+      - name: KC_SPI_EVENTS_LISTENER_OPENFGA_EVENTS_PUBLISHER_OPENFGA_API_TOKEN
+        valueFrom:
+          secretKeyRef:
+            name: preshared-keys
+            key: keys
     initdbScripts:
       10_openfga_event_publisher.sh: |
         #!/bin/bash
         set -euo pipefail
         echo "[initdb] Installing OpenFGA provider"
         curl -sSL \
-          https://github.com/embesozzi/keycloak-openfga-event-publisher/releases/download/1.1.1/keycloak-openfga-event-publisher.jar \
+          https://github.com/cloudlabs-ufscar/keycloak-openfga-event-publisher/releases/download/1.2.3/keycloak-openfga-event-publisher.jar \
           -o /opt/bitnami/keycloak/providers/keycloak-openfga-event-publisher.jar
         ls -l /opt/bitnami/keycloak/providers
