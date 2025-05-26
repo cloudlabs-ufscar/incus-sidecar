@@ -47,3 +47,10 @@ spec:
           https://github.com/cloudlabs-ufscar/keycloak-openfga-event-publisher/releases/download/1.2.3/keycloak-openfga-event-publisher.jar \
           -o /opt/bitnami/keycloak/providers/keycloak-openfga-event-publisher.jar
         ls -l /opt/bitnami/keycloak/providers
+    resources:
+      requests:
+        cpu: 0.75
+        memory: 512Mi
+      limits:
+        cpu: 2
+        memory: 2Gi
