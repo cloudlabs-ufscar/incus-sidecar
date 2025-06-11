@@ -56,7 +56,7 @@ spec:
             maxLines: 1000
     prometheus:
       prometheusSpec:
-        retention: 24w
+        retention: 2w
         storageSpec:
           volumeClaimTemplate:
             spec:
