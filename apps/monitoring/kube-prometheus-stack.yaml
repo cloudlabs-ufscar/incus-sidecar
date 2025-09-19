@@ -32,11 +32,11 @@ spec:
         enabled: true
         ingressClassName: traefik
         hosts:
-          - cloudlabs-grafana.duckdns.org
+          - grafana.cloudlabs
         tls:
-          - secretName: cloudlabs-grafana.duckdns.org-tls
+          - secretName: grafana.cloudlabs-tls
             hosts:
-              - cloudlabs-grafana.duckdns.org
+              - grafana.cloudlabs
         annotations:
           kubernetes.io/ingress.class: traefik
           cert-manager.io/cluster-issuer: letsencrypt

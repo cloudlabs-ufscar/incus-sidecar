@@ -25,7 +25,7 @@ spec:
     ingress:
       enabled: true
       ingressClassName: traefik
-      hostname: cloudlabs-keycloak.duckdns.org
+      hostname: keycloak.cloudlabs
       annotations:
         kubernetes.io/ingress.class: traefik
         cert-manager.io/cluster-issuer: letsencrypt

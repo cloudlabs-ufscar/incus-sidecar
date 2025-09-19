@@ -46,12 +46,12 @@ spec:
         kubernetes.io/ingress.class: traefik
         cert-manager.io/cluster-issuer: letsencrypt
       hosts:
-        - host: cloudlabs-openfga.duckdns.org
+        - host: openfga.cloudlabs
           paths:
             - path: /
               pathType: ImplementationSpecific
       tls:
-        - secretName: cloudlabs-openfga.duckdns.org-tls
+        - secretName: openfga.cloudlabs-tls
           hosts:
-            - cloudlabs-openfga.duckdns.org
+            - openfga.cloudlabs
 
