@@ -21,7 +21,7 @@ For a comprehensive and up to date guide on how to perform the bootstrap process
 The bootstrap command for this repository should look something like this:
 
 ```shell
-GITHUB_TOKEN=<gh-token> flux bootstrap github \
+$ GITHUB_TOKEN=<gh-token> flux bootstrap github \
                           --token-auth \
                           --owner=cloudlabs-ufscar \
                           --repository=incus-sidecar \
@@ -38,7 +38,7 @@ $ kubectl get all -n flux-system
 There should also be a git source registered in Flux, usually referencing the latest commit of the `main` branch. You can check that by running the following command:
 
 ```shell
-flux get sources git
+$ flux get sources git
 ```
 
 With that, the setup is complete. Flux will automatically sync and apply any changes made to the git repository to the Kubernetes cluster. The applying of new changes usually takes a few minutes. If you need to troubleshoot something, the [Flux troubleshooting guide](https://fluxcd.io/flux/cheatsheets/troubleshooting/) is a great resource to get started.
