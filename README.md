@@ -41,4 +41,11 @@ There should also be a git source registered in Flux, usually referencing the la
 $ flux get sources git
 ```
 
-With that, the setup is complete. Flux will automatically sync and apply any changes made to the git repository to the Kubernetes cluster. The applying of new changes usually takes a few minutes. If you need to troubleshoot something, the [Flux troubleshooting guide](https://fluxcd.io/flux/cheatsheets/troubleshooting/) is a great resource to get started.
+With that, the Flux setup is complete. Flux will automatically sync and apply any changes made to the git repository to the Kubernetes cluster. The applying of new changes usually takes a few minutes. If you need to troubleshoot something, the [Flux troubleshooting guide](https://fluxcd.io/flux/cheatsheets/troubleshooting/) is a great resource to get started.
+
+The last step is to create the `preshared-keys` secret in the `auth` namespace. This secret will be used by Keycloak and Incus to authenticate against the OpenFGA API.
+
+```shell
+$ kubectl create secret -n auth generic preshared-keys --from-literal=keys=<secret-key>
+$ juju config incus openfga-api-token=<secret-key>
+```
