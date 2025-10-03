@@ -1,0 +1,31 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: ingress-system
+---
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: HelmRepository
+metadata:
+  name: traefik
+  namespace: ingress-system 
+spec:
+  interval: 24h
+  url: https://helm.traefik.io/traefik
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: traefik
+  namespace: traefik 
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: traefik
+      version: ">=28.0.0" 
+      sourceRef:
+        kind: HelmRepository
+        name: traefik 
+        namespace: ingress-system
+      interval: 12h
