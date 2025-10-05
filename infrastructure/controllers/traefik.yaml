@@ -35,6 +35,6 @@ spec:
     ports:
       websecure:
         #port: 443
-        #nodePort: 30443
+        nodePort: 30443
         #tls:
           #enabled: true
