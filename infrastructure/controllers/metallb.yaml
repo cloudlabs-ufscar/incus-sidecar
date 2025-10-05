@@ -23,17 +23,39 @@ spec:
   chart:
     spec:
       chart: metallb
-      version: ">=0.13.0"
+      version: ">=0.14.0"
       sourceRef:
         kind: HelmRepository
         name: metallb
         namespace: loadbalance
       interval: 12h
-  #values:
-    # 'configInline' é como o chart MetalLB recebe configs para criar ConfigMap
-    #configInline:
-      #address-pools:
-      #- name: default
-        #protocol: layer2
-        #addresses:
-        #- 192.168.1.240-192.168.1.240
+  install:
+    crds: Create
+    remediation:
+      retries: 3
+  upgrade:
+    crds: CreateReplace
+    remediation:
+      retries: 3
+---
+apiVersion: metallb.io/v1beta1
+kind: IPAddressPool
+metadata:
+  name: default-pool
+  namespace: loadbalance
+spec:
+  addresses:
+    - TBD
+  #autoAssign: true
+---
+apiVersion: metallb.io/v1beta1
+kind: L2Advertisement
+metadata:
+  name: default-l2
+  namespace: loadbalance
+spec:
+  ipAddressPools:
+    - default-pool
+  # Optional: restrict to specific node NICs if multi-homed
+  # interfaces:
+  #   - eth0
