@@ -41,12 +41,20 @@ spec:
 apiVersion: metallb.io/v1beta1
 kind: IPAddressPool
 metadata:
-  name: default-pool
+  name: incus
   namespace: loadbalance
 spec:
   addresses:
-    - TBD
-  #autoAssign: true
+    - 192.168.200.12
+
+apiVersion: metallb.io/v1beta1
+kind: IPAddressPool
+metadata:
+  name: openstack
+  namespace: loadbalance
+spec:
+  addresses:
+    - 192.168.100.13
 ---
 apiVersion: metallb.io/v1beta1
 kind: L2Advertisement
@@ -55,7 +63,8 @@ metadata:
   namespace: loadbalance
 spec:
   ipAddressPools:
-    - default-pool
+    - incus
+    - openstack
   # Optional: restrict to specific node NICs if multi-homed
   # interfaces:
   #   - eth0
