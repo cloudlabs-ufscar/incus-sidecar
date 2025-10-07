@@ -37,3 +37,34 @@ spec:
     crds: CreateReplace
     remediation:
       retries: 3
+---
+apiVersion: metallb.io/v1beta1
+kind: IPAddressPool
+metadata:
+  name: incus
+  namespace: loadbalance
+spec:
+  addresses:
+    - 192.168.200.12
+
+apiVersion: metallb.io/v1beta1
+kind: IPAddressPool
+metadata:
+  name: openstack
+  namespace: loadbalance
+spec:
+  addresses:
+    - 192.168.100.13
+---
+apiVersion: metallb.io/v1beta1
+kind: L2Advertisement
+metadata:
+  name: default-l2
+  namespace: loadbalance
+spec:
+  ipAddressPools:
+    - incus
+    - openstack
+  # Optional: restrict to specific node NICs if multi-homed
+  # interfaces:
+  #   - eth0
